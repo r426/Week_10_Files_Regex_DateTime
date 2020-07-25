@@ -26,15 +26,15 @@ import os, sys
 import re
 
 if os.path.isfile('doc1.txt'):
-    f = open('doc1.txt', 'r+')
+    with open('doc1.txt', 'r') as f:
+         s = f.read()
 else:
     print("File Does Not Exist")
     sys.exit()
 
-s = f.read()
 sArray = s.split()
 result = [x for x in sArray if not re.findall("\W", x)]
-f.write("\nEditing the file through python scripting, wohoooo!")
-
 print(result)
-f.close()
+
+with open('doc1.txt', 'a') as f:
+    f.write("\nEditing the file through python scripting, wohoooo!")
